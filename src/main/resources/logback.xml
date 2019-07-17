@@ -1,0 +1,27 @@
+<configuration>
+
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%date{ISO8601} %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    <destination>192.168.1.167:9250</destination>
+    <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder"/>
+  </appender>
+
+  <logger name="info.galudisu.userservice" level="debug" additivity="false">
+    <appender-ref ref="console"/>
+  </logger>
+
+  <logger name="akka" level="info" additivity="false">
+    <appender-ref ref="console"/>
+  </logger>
+
+  <root level="info">
+    <appender-ref ref="console"/>
+    <appender-ref ref="stash"/>
+  </root>
+
+</configuration>
